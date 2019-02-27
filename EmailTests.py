@@ -16,6 +16,8 @@ class EmailTests(unittest.TestCase):
         -"Message sent successfully"
         If message is not sent, send notification failed
         -"Message not sent"
+        if access is denied
+        -"access denied"
     """
     def test_admin_user(self):
         self.ui.command(self.ui.command("login_Supervisor Sup SupPassword"), "login successful")
