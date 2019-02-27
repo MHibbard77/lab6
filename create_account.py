@@ -50,3 +50,7 @@ class CreateAccountTests(unittest.TestCase):
         self.assertEqual(self.ui.command("create_account newTA newTAPassword wherever@whatever.com"),
                          "Username already taken.")
 
+    def test_command_create_account_invalid_arguments(self):
+        self.ui.command("login Supervisor SupervisorPassword")
+        self.assertEqual(self.ui.command("create_account newTA5 newTAPassword5"),
+                         "Invalid arguments in command.")
