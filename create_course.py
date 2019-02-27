@@ -20,3 +20,20 @@ class CreateCourseTests(unittest.TestCase):
     If Title already exists, failure:
     - "Error creating  course."
     """
+    def test_command_create_course_correct(self):
+        self.assertEqual(self.ui.command("create_course Administrator"), "Create course successful.")
+        self.assertEqual(self.ui.command("create_course Supervisor"), "Create course successful.")
+
+    def test_command_create_course_no_title(self):
+        self.assertEqual(self.ui.command("create_course Administrator"), "Error creating course.")
+        self.assertEqual(self.ui.command("create_course Supervisor"), "Error creating course.")
+
+    def test_command_create_course_no_instructor(self):
+        self.assertEqual(self.ui.command("create_course Administrator"), "Error creating course.")
+        self.assertEqual(self.ui.command("create_course Supervisor"), "Error creating course.")
+
+    def test_command_create_course_already_exists(self):
+        self.ui.command("create_course Administrator")
+        self.assertEqual(self.ui.command("create_course Administrator"), "Error creating course")
+        self.ui.command("create_course Supervisor")
+        self.assertEqual(self.ui.command("create_course Supervisor"), "Error creating course")
