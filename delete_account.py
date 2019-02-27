@@ -43,3 +43,4 @@ class deleteTests(unittest.TestCase):
     def test_delete_wrongUsername(self):
         self.assertEqual(self.ui.command("delete TA1"), "Error deleting account")
 
+    def
