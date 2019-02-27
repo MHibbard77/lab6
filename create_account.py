@@ -24,3 +24,29 @@ class CreateAccountTests(unittest.TestCase):
         If the user is not logged in as a Supervisor or Administrator, failure:
         - "You are not authorized to create accounts."
     """
+
+    def test_command_create_account_supervisor(self):
+        self.ui.command("login Supervisor SupervisorPassword")
+        self.assertEqual(self.ui.command("create_account newTA newTAPassword wherever@whatever.com"),
+                         "Account created successfully.")
+
+    def test_command_create_account_administrator(self):
+        self.ui.command("login Administrator AdministratorPassword")
+        self.assertEqual(self.ui.command("create_account newTA2 newTAPassword2 wherever2@whatever.com"),
+                         "Account created successfully.")
+
+    def test_command_create_account_instructor(self):
+        self.ui.command("login Instructor InstructorPassword")
+        self.assertEqual(self.ui.command("create_account newTA3 newTAPassword3 wherever3@whatever.com"),
+                         "You are not authorized to create accounts.")
+
+    def test_command_create_account_TA(self):
+        self.ui.command("login TA TAPassword")
+        self.assertEqual(self.ui.command("create_account newTA4 newTAPassword4 wherever4@whatever.com"),
+                         "You are not authorized to create accounts.")
+
+    def test_command_create_account_already_exists(self):
+        self.ui.command("login Supervisor SupervisorPassword")
+        self.assertEqual(self.ui.command("create_account newTA newTAPassword wherever@whatever.com"),
+                         "Username already taken.")
+
